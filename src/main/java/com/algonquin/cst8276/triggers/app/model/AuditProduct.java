@@ -10,13 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Immutable;
-
 
 @Entity
 @Immutable
@@ -27,27 +22,22 @@ public class AuditProduct {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_AUDIT_PRODUCTS_ID")
     @SequenceGenerator(name = "SEQ_AUDIT_PRODUCTS_ID", sequenceName = "SEQ_AUDIT_PRODUCTS_ID", allocationSize = 1)
     private Long id;
-    
-    @NotNull
-    @Size(max = 50)
+
     private String name;
 
-    @DecimalMin("0.01")
     private BigDecimal unitPrice;
 
-    @Min(0)
     @Column(name = "INVENTORY_COUNT")
     private Integer count;
 
     private Integer inventoryChange;
 
-    @Size(min = 6, max = 6)
+    @Column(name = "REVISION_TYPE")
     private String revisionType;
 
     private LocalDateTime revisionTstmp;
 
-    @Column(name = "product_id", nullable = false)
-    private Product product;
+    private Long productId;
 
     public Long getId() {
         return id;
@@ -105,12 +95,12 @@ public class AuditProduct {
         this.revisionTstmp = revisionTstmp;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProduct() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Long productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -118,6 +108,8 @@ public class AuditProduct {
         StringBuilder builder = new StringBuilder();
         builder.append("AuditProduct [id=");
         builder.append(id);
+        builder.append(", productId=");
+        builder.append(productId);
         builder.append(", name=");
         builder.append(name);
         builder.append(", unitPrice=");

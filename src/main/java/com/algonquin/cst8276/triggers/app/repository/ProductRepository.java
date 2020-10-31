@@ -1,7 +1,12 @@
 package com.algonquin.cst8276.triggers.app.repository;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,37 @@ public interface ProductRepository extends JpaRepository<Product, Long> { // @fo
 	@Query("SELECT p.id AS id, p.name AS name, p.count AS count, p.unitPrice AS price"
 			+ " FROM Product p"
 			+ " WHERE p.id = ?1")
-    ProductProjection findProjectionById(Long productId);
+    ProductProjection findDtoById(Long productId);
+	
+	@Query("SELECT p.id AS id, p.name AS name, p.count AS count, p.unitPrice AS price"
+	        + " FROM Product p")
+	List<ProductProjection> findAllDtos();
+	
+	@Query("SELECT p.id AS id, p.name AS name"
+	        + " FROM Product p")
+	List<ProductProjection> findAllNames();
+	
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Product p"
+	        + " SET p.count = p.count + :count"
+	        + " WHERE  p.id = :id")
+	void addInventory(@Param("id") Long productId, @Param("count") Integer newCount);
+	
+	@Query("SELECT p.count AS count"
+	        + " FROM Product p"
+	        + " WHERE p.id = ?1")
+	Integer findCount(Long productId);
+	
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query("DELETE FROM Product p"
+	        + " WHERE p.id = ?1")
+	void deleteProduct(Long productId);
+	
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(value = "INSERT INTO PRODUCTS VALUES (SEQ_PRODUCTS_ID.NEXTVAL, :name, :count, :price)", nativeQuery = true)
+	void createProduct(@Param("name") String name, @Param("count") Integer count, @Param("price") BigDecimal unitPrice);
 
 } // @formatter:on

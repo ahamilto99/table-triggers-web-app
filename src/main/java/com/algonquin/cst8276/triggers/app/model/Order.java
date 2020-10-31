@@ -5,12 +5,9 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -31,7 +28,7 @@ public class Order {
     
     @NotNull
     @Size(max = 255)
-    private String name;
+    private String customerName;
     
     @Min(1)
     private Integer quantity;
@@ -44,8 +41,8 @@ public class Order {
     @Column(name = "tstmp", insertable = false, updatable = false)
     private LocalDateTime timestamp;
 
-    @Column(name = "product_id", nullable = false)
-    private Product product;
+    @NotNull
+    private Long productId;
 
     public Long getId() {
         return id;
@@ -55,12 +52,12 @@ public class Order {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCutsomerName() {
+        return customerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public Integer getQuantity() {
@@ -79,12 +76,12 @@ public class Order {
         return timestamp;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -92,8 +89,8 @@ public class Order {
         StringBuilder builder = new StringBuilder();
         builder.append("Order [id=");
         builder.append(id);
-        builder.append(", name=");
-        builder.append(name);
+        builder.append(", customerName=");
+        builder.append(customerName);
         builder.append(", quantity=");
         builder.append(quantity);
         builder.append(", orderPrice=");

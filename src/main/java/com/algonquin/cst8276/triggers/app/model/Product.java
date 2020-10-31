@@ -26,7 +26,7 @@ public class Product {
     private String name;
     
     @Min(0)
-    @Column(name = "inventory_count")
+    @Column(name = "INVENTORY_COUNT")
     private Integer count;
     
     @DecimalMin("0.01")
