@@ -5,47 +5,48 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.annotation.Immutable;
+
+
 @Entity
+@Immutable
 @Table(name = "AUDIT_PRODUCTS")
 public class AuditProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_AUDIT_PRODUCTS_ID")
-    @SequenceGenerator(name = "SEQ_AUDIT_PRODUCTS_ID", sequenceName = "SEQ_AUDIT_PRODUCTS_ID")
+    @SequenceGenerator(name = "SEQ_AUDIT_PRODUCTS_ID", sequenceName = "SEQ_AUDIT_PRODUCTS_ID", allocationSize = 1)
     private Long id;
+    
+    @NotNull
+    @Size(max = 50)
+    private String name;
 
     @DecimalMin("0.01")
-    @Column(updatable = false)
     private BigDecimal unitPrice;
 
     @Min(0)
-    @Column(name = "INVENTORY_COUNT", updatable = false)
+    @Column(name = "INVENTORY_COUNT")
     private Integer count;
 
-    @Column(updatable = false)
     private Integer inventoryChange;
 
     @Size(min = 6, max = 6)
-    @Column(updatable = false)
     private String revisionType;
 
-    @Column(updatable = false)
     private LocalDateTime revisionTstmp;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id", nullable = false, updatable = false)
+    @Column(name = "product_id", nullable = false)
     private Product product;
 
     public Long getId() {
@@ -54,6 +55,14 @@ public class AuditProduct {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getUnitPrice() {
@@ -105,26 +114,12 @@ public class AuditProduct {
     }
 
     @Override
-    public int hashCode() {
-        return 2020;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-
-        return id != null && id.equals(((AuditProduct) obj).getId());
-    }
-
-    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("AuditProduct [id=");
         builder.append(id);
+        builder.append(", name=");
+        builder.append(name);
         builder.append(", unitPrice=");
         builder.append(unitPrice);
         builder.append(", count=");
