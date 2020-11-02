@@ -15,7 +15,7 @@ import org.springframework.data.annotation.Immutable;
 
 @Entity
 @Immutable
-@Table(name = "AUDIT_PRODUCTS")
+@Table(name = "AUDIT_PRODUCTS", schema = "C##AL")
 public class AuditProduct {
 
     @Id

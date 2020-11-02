@@ -33,7 +33,7 @@ public interface AuditProductRepository extends JpaRepository<AuditProduct, Long
 
     @Query(value = "SELECT id AS id, name AS name, inventory_count AS count, inventory_change AS countChange, revision_type AS revType,"
                     + "     unit_price AS price, revision_tstmp AS revTstmp, product_id AS productId"
-                    + " FROM audit_products"
+                    + " FROM C##AL.AUDIT_PRODUCTS"
                     + " WHERE product_id = ?1"
                     + " ORDER BY revision_tstmp DESC"
                     + " FETCH NEXT 1 ROWS ONLY", nativeQuery = true)

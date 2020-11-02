@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "PRODUCTS", schema = "C##AL")
 public class Product {
 
     @Id

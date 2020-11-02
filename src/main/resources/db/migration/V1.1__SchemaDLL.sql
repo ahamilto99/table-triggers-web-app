@@ -8,15 +8,16 @@
 
 -- 3) Launch the app and then create the app user account
 --CREATE USER C##APP_USER IDENTIFIED BY APP;
+--GRANT CREATE SESSION TO C##APP_USER;
 --GRANT SELECT, INSERT, UPDATE, DELETE ON PRODUCTS TO C##APP_USER;
 --GRANT SELECT, INSERT ON AUDIT_PRODUCTS TO C##APP_USER;
 --GRANT SELECT, INSERT, UPDATE, DELETE ON ORDERS TO C##APP_USER;
 
--- 4) After successful launch, terminate the app and change the user details
--- in the application.properties to match the app user above; then re-launch the app
+-- 4) After successful launch, terminate the app and in the application.properties file,
+-- disable flyway and change the user details to match the app user above; then re-launch the app
 
 -- TABLES DDL
-CREATE TABLE PRODUCTS (
+CREATE TABLE C##AL.PRODUCTS (
      ID NUMBER,
      NAME VARCHAR2(50),
      INVENTORY_COUNT NUMBER(10),
@@ -24,7 +25,7 @@ CREATE TABLE PRODUCTS (
      PRIMARY KEY(ID)
 );
 
-CREATE TABLE AUDIT_PRODUCTS (
+CREATE TABLE C##AL.AUDIT_PRODUCTS (
      ID NUMBER,
      NAME VARCHAR2(50),
      UNIT_PRICE NUMBER(*,2),
@@ -36,7 +37,7 @@ CREATE TABLE AUDIT_PRODUCTS (
      PRIMARY KEY(ID)
 );
 
-CREATE TABLE ORDERS (
+CREATE TABLE C##AL.ORDERS (
      ID NUMBER,
      CUSTOMER_NAME VARCHAR2(50),
      QUANTITY NUMBER(10),
