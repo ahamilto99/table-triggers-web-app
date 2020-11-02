@@ -50,7 +50,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> { // @fo
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query(value = "INSERT INTO C##AL.PRODUCTS VALUES (SEQ_PRODUCTS_ID.NEXTVAL, :name, :count, :price)", nativeQuery = true)
+	@Query(value = "INSERT INTO C##AL.PRODUCTS VALUES (C##AL.SEQ_PRODUCTS_ID.NEXTVAL, :name, :count, :price)", nativeQuery = true)
 	void insertProduct(@Param("name") String name, @Param("count") Integer count, @Param("price") BigDecimal unitPrice);
 
 } // @formatter:on

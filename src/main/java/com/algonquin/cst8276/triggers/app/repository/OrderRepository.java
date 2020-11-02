@@ -35,7 +35,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> { // @format
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = "INSERT INTO C##AL.ORDERS (ID, CUSTOMER_NAME, QUANTITY, PRODUCT_ID) VALUES "
-            + "(SEQ_ORDERS_ID.NEXTVAL, :customer, :quantity, :product)", nativeQuery = true)
+            + "(C##AL.SEQ_ORDERS_ID.NEXTVAL, :customer, :quantity, :product)", nativeQuery = true)
     void insert(@Param("customer") String customer, @Param("quantity") Integer quantity, @Param("product") Long productId);
     
     @Transactional

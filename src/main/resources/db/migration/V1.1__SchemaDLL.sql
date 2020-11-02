@@ -12,6 +12,8 @@
 --GRANT SELECT, INSERT, UPDATE, DELETE ON PRODUCTS TO C##APP_USER;
 --GRANT SELECT, INSERT ON AUDIT_PRODUCTS TO C##APP_USER;
 --GRANT SELECT, INSERT, UPDATE, DELETE ON ORDERS TO C##APP_USER;
+--GRANT SELECT ON C##AL.SEQ_ORDERS_ID TO C##APP_USER;
+--GRANT SELECT ON C##AL.SEQ_PRODUCTS_ID TO C##APP_USER;
 
 -- 4) After successful launch, terminate the app and in the application.properties file,
 -- disable flyway and change the user details to match the app user above; then re-launch the app
