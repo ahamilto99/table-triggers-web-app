@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.algonquin.cst8276.triggers.app.model.dto.ProductProjection;
 import com.algonquin.cst8276.triggers.app.repository.ProductRepository;
@@ -22,7 +24,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductProjection findProductDtoById(Long productId) {
-        return productRepository.findDtoById(productId);
+        ProductProjection productProjection = productRepository.findDtoById(productId);
+
+        if (productProjection == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "\n\nProduct id= " + productId + " does not exist\n\n");
+
+        return productProjection;
     }
 
     @Override
@@ -31,8 +38,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductProjection> findAllProductNames() {
-        return productRepository.findAllNames();
+    public List<ProductProjection> findAllProductNamesPrices() {
+        return productRepository.findAllNamesPrices();
     }
 
     @Override
@@ -47,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void createProduct(String name, Integer count, BigDecimal unitPrice) {
-        productRepository.createProduct(name, count, unitPrice);
+        productRepository.insertProduct(name, count, unitPrice);
     }
 
 }

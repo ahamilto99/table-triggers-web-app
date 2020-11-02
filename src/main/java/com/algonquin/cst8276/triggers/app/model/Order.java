@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,11 +27,11 @@ public class Order {
     @SequenceGenerator(name = "SEQ_ORDERS_ID", sequenceName = "SEQ_ORDERS_ID", allocationSize = 1)
     private Long id;
     
-    @NotNull
-    @Size(max = 255)
+    @NotEmpty(message = "Please enter a name")
+    @Size(max = 50, message = "Name cannot be longer than 50 characters")
     private String customerName;
     
-    @Min(1)
+    @Min(value = 1, message = "Quantity cannot be less than 1")
     private Integer quantity;
 
     @Generated(GenerationTime.ALWAYS)
@@ -41,7 +42,7 @@ public class Order {
     @Column(name = "tstmp", insertable = false, updatable = false)
     private LocalDateTime timestamp;
 
-    @NotNull
+    @NotNull(message = "Please select a product")
     private Long productId;
 
     public Long getId() {
@@ -52,7 +53,7 @@ public class Order {
         this.id = id;
     }
 
-    public String getCutsomerName() {
+    public String getCustomerName() {
         return customerName;
     }
 

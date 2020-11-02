@@ -1,5 +1,7 @@
 package com.algonquin.cst8276.triggers.app.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,11 @@ public interface AuditProductRepository extends JpaRepository<AuditProduct, Long
             + " FROM AuditProduct ap"
             + " WHERE ap.revisionType = 'DELETE'")
     long findNumDeletes();
+    
+    @Query("SELECT COUNT(ap.revisionType)"
+            + " FROM AuditProduct ap"
+            + " WHERE ap.revisionType = 'UPDATE'")
+    long findNumUpdates();
 
     @Query(value = "SELECT id AS id, name AS name, inventory_count AS count, inventory_change AS countChange, revision_type AS revType,"
                     + "     unit_price AS price, revision_tstmp AS revTstmp, product_id AS productId"
@@ -38,5 +45,11 @@ public interface AuditProductRepository extends JpaRepository<AuditProduct, Long
             + " WHERE ap.revisionType = 'DELETE'"
             + " AND ap.productId = ?1")
     Boolean checkIfDeleted(Long productId);
+    
+    @Query("SELECT ap.name AS name, ap.unitPrice AS price, ap. count AS count, ap.inventoryChange AS countChange,"
+                + " ap.revisionType AS revType, ap.revisionTstmp AS revTstmp"
+            + " FROM AuditProduct ap"
+            + " ORDER BY ap.id DESC")
+    List<AuditProductProjection> findAllDtos(); 
     
 }   // @formatter:on

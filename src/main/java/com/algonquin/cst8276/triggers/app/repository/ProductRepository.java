@@ -26,9 +26,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> { // @fo
 	        + " FROM Product p")
 	List<ProductProjection> findAllDtos();
 	
-	@Query("SELECT p.id AS id, p.name AS name"
+	@Query("SELECT p.id AS id, p.name AS name, p.unitPrice AS price"
 	        + " FROM Product p")
-	List<ProductProjection> findAllNames();
+	List<ProductProjection> findAllNamesPrices();
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)
@@ -51,6 +51,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> { // @fo
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query(value = "INSERT INTO PRODUCTS VALUES (SEQ_PRODUCTS_ID.NEXTVAL, :name, :count, :price)", nativeQuery = true)
-	void createProduct(@Param("name") String name, @Param("count") Integer count, @Param("price") BigDecimal unitPrice);
+	void insertProduct(@Param("name") String name, @Param("count") Integer count, @Param("price") BigDecimal unitPrice);
 
 } // @formatter:on

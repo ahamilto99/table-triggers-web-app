@@ -1,8 +1,8 @@
 package com.algonquin.cst8276.triggers.app.product;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
@@ -54,7 +54,7 @@ public class ProductServiceTest {
 
     @Test
     void testFindAllProductNames() {
-        List<ProductProjection> productDtos = productService.findAllProductNames();
+        List<ProductProjection> productDtos = productService.findAllProductNamesPrices();
 
         assertEquals(productRepository.count(), productDtos.size());
 

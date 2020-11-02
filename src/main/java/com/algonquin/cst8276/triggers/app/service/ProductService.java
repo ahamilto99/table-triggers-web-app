@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<ProductProjection> findAllProductDtos();
 
-    List<ProductProjection> findAllProductNames();
+    List<ProductProjection> findAllProductNamesPrices();
 
     void addInventoryForOneProduct(Long productId, int numToAdd);
 

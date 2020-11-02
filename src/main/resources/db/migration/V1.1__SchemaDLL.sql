@@ -1,6 +1,19 @@
--- DBA
+-- 1) Create Docker Container
+-- docker run -dit --name oracle-db-container -p 51234:1521 -e DB_SID=IMSDB store/oracle/database-enterprise:12.2.0.1-slim
+
+-- 2) Connect to the database instance (SYS AS SYSDBA; Oradoc_db1), create DBA
+-- and then connect to the database as the DBA
 --CREATE USER C##AL IDENTIFIED BY AL;
 --GRANT DBA TO C##AL;
+
+-- 3) Launch the app and then create the app user account
+--CREATE USER C##APP_USER IDENTIFIED BY APP;
+--GRANT SELECT, INSERT, UPDATE, DELETE ON PRODUCTS TO C##APP_USER;
+--GRANT SELECT, INSERT ON AUDIT_PRODUCTS TO C##APP_USER;
+--GRANT SELECT, INSERT, UPDATE, DELETE ON ORDERS TO C##APP_USER;
+
+-- After successful launch, terminate the app and change the user details
+-- in the application.properties to match the app user above; then re-launch the app
 
 -- TABLES DDL
 CREATE TABLE PRODUCTS (
@@ -39,11 +52,4 @@ CREATE SEQUENCE SEQ_PRODUCTS_ID START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE SEQ_ORDERS_ID START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE SEQ_AUDIT_PRODUCTS_ID START WITH 1 INCREMENT BY 1;
-
--- APP USER
-CREATE USER C##APP_USER IDENTIFIED BY APP;
-GRANT SELECT, INSERT, UPDATE, DELETE ON PRODUCTS TO C##APP_USER;
-GRANT SELECT, INSERT ON AUDIT_PRODUCTS TO C##APP_USER;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ORDERS TO C##APP_USER;
-
 

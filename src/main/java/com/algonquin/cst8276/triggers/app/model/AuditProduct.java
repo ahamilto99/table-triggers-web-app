@@ -32,7 +32,6 @@ public class AuditProduct {
 
     private Integer inventoryChange;
 
-    @Column(name = "REVISION_TYPE")
     private String revisionType;
 
     private LocalDateTime revisionTstmp;

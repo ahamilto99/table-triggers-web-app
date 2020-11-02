@@ -1,8 +1,11 @@
 package com.algonquin.cst8276.triggers.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.algonquin.cst8276.triggers.app.model.dto.AuditProductProjection;
 import com.algonquin.cst8276.triggers.app.repository.AuditProductRepository;
 import com.algonquin.cst8276.triggers.app.service.AuditProductService;
 
@@ -24,6 +27,11 @@ public class AuditProductServiceImpl implements AuditProductService {
     @Override
     public long findNumProductDeletes() {
         return auditProductRepository.findNumDeletes();
+    }
+
+    @Override
+    public List<AuditProductProjection> findAllAuditProductDtos() {
+        return auditProductRepository.findAllDtos();
     }
 
 }
