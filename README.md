@@ -58,6 +58,6 @@ spring.flyway.enabled=false
 
 9) Launch app.
 
-Done!
+10) Done!
 
 
