@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IMS - Historical Inventory</title>
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="http://localhost:8080/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/css/tooplate-style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <section class="tm-section-head" id="top">
+            <header id="header" class="tm-text-gray">
+                <h1>Inventory Managment System</h1>
+                <p>HISTORICAL INVENTORY</p>
+            </header>
+        </section>
+
+        <section class="tm-section-1 tm-section-mb">
+
+            <table id="auditsTable"
+                class="wb-tables table table-striped table-hover dataTable"
+                aria-live="polite">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Count</th>
+                        <th>Change</th>
+                        <th>Unit Price</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="audit : ${audits}">
+                        <td><span th:text="${audit.getName()}"></span></td>
+                        <td><span th:text="${audit.getRevType()}"></span></td>
+                        <td><span th:text="${#numbers.formatInteger(audit.getCount(), 1, 'COMMA')}"></span></td>
+                        <td><span th:text="${#numbers.formatInteger(audit.getCountChange(), 1, 'COMMA')}"></span></td>
+                        <td><span th:text="'$ ' + ${#numbers.formatDecimal(audit.getPrice(), 0, 'COMMA', 2, 'POINT')}"></span></td>
+                        <td><span th:text="${#temporals.format(audit.getRevTstmp(), 'h:mm:ss a - MMM d, yyyy')}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <footer class="mt-5">
+            <p class="text-center">
+                <a href="/home" th:text="Home" style="color: darkblue;"></a>
+            </p>
+        </footer>
+        
+    </div>
+
+</body>
+
+</html>
