@@ -1,4 +1,4 @@
-package com.algonquin.cst8276.groupproject.triggerswebapp;
+package com.algonquin.cst8276.triggers.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
