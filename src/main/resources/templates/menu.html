@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IMS - Menu</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/tooplate-style.css">
+
+</head>
+
+<body>
+
+	<div class="container">
+		<section class="tm-section-head" id="top">
+			<header id="header" class="tm-text-gray">
+				<h1>Inventory Managment System</h1>
+				<p>WELCOME</p>
+			</header>
+		</section>
+
+		<section class="tm-section-1 tm-section-mb" id="tm-section-2">
+
+			<div class="row" style="margin-bottom: 100px;">
+				<div class="col-lg-6">
+					<div class="well">
+						<div class="row">
+							<div class="col-lg-2">
+								<i class="fa fa-credit-card fa-5x"></i>
+							</div>
+							<div class="col-lg-10">
+								<a href="/orders/new" style="font-size: 2.5em;">Place Order</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-lg-6">
+					<div class="well">
+						<div class="row">
+							<div class="col-lg-2">
+								<i class="fa fa-barcode fa-5x"></i>
+							</div>
+							<div class="col-lg-10">
+								<a href="orders" style="font-size: 2.5em;">View Orders</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="margin-bottom: 200px;">
+				<div class="col-lg-6">
+					<div class="well">
+						<div class="row">
+							<div class="col-lg-2">
+								<i class="fa fa-bar-chart fa-5x"></i>
+							</div>
+							<div class="col-lg-10">
+								<a href="inventory" style="font-size: 2.5em;">Current
+									Inventory</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="well">
+						<div class="row">
+							<div class="col-lg-2">
+								<i class="fa fa-archive fa-5x"></i>
+							</div>
+							<div class="col-lg-10">
+								<a href="inventory/history" style="font-size: 2.5em;">Historical
+									Inventory</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<footer class="mt-5">
+			<p class="text-center">
+				<a href="/home" th:text="Home" style="color: darkblue;"></a>
+			</p>
+		</footer>
+	</div>
+
+</body>
+
+</html>

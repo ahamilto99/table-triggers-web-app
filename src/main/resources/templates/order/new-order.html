@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IMS - Create Order</title>
+    
+<link rel="stylesheet" href="http://localhost:8080/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/css/tooplate-style.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <section class="tm-section-head" id="top">
+            <header id="header" class="tm-text-gray">
+                <h1>Inventory Managment System</h1>
+                <p>CREATE ORDER</p>
+            </header>
+        </section>
+
+        <section class="tm-section-1 tm-section-mb">
+
+            <form action="#" th:action="@{/orders/new}" th:object="${order}" method="post" style="margin: 50px 0px;">
+            
+                <div class="form-group">
+                    <label class="col-lg-2">Customer Name</label>
+                    <input class="col-lg-5" type="text" th:field="*{customerName}" />
+                    <span th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" style="color: red; margin-left: 50px;"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-lg-2">Product</label>
+                    <select id="productInput" th:field="*{productId}" class="text-center" onchange="calculateTotalPrice()">
+                        <option th:each="product : ${products}" th:value="${product.getId()}" th:text="${product.getName()}"></option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}" style="color: red; margin-left: 50px;"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-lg-2">Quantity</label>
+                    <input id="qtyInput" class="col-lg-2 text-center" type="number" th:field="*{quantity}" onchange="calculateTotalPrice()" min="1"/>
+                    <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" style="color: red; margin-left: 50px;"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-lg-2">Total Price</label>
+                    <span id="totalPriceOutput"></span>
+                </div>
+                
+                <div hidden="true">
+                    <select id="priceInput">
+                        <option th:each="product : ${products}" th:value="${product.getId()}" th:text="${product.getPrice()}"></option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" role="button" value="Submit" />
+                    <a href="/home" style="margin-left: 50px;" class="btn btn-link">Cancel</a>
+                </div>
+            
+            </form>
+            
+        </section>
+
+        <footer class="mt-5">
+            <p class="text-center">
+                <a href="/home" th:text="Home" style="color: darkblue;"></a>
+            </p>
+        </footer>
+        
+        <script type="text/javascript">
+        
+        $(document).ready(function() {
+        	$("#totalPriceOutput").text(calculateTotalPrice());
+        });
+        
+        function calculateTotalPrice() {
+        	productId = document.getElementById('productInput').value;
+        	priceInput = document.getElementById('priceInput'); 
+        	
+        	priceInput.value = productId;
+        	pricePerUnit = priceInput.options[priceInput.selectedIndex].text;
+            totalPrice = pricePerUnit * document.getElementById('qtyInput').value
+        	
+            document.getElementById('totalPriceOutput').innerHTML = formatCurrency(totalPrice);
+        }
+        
+        function formatCurrency(total) {
+            return '$ ' + parseFloat(total, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+        }
+        </script>
+        
+    </div>
+
+</body>
+
+</html>
