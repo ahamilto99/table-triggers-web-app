@@ -19,7 +19,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "ORDERS", schema = "C##AL")
 public class Order {
 
     @Id

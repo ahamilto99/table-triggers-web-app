@@ -34,19 +34,19 @@ public interface OrderRepository extends JpaRepository<Order, Long> { // @format
     
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "INSERT INTO ORDERS (ID, CUSTOMER_NAME, QUANTITY, PRODUCT_ID) VALUES "
-            + "(SEQ_ORDERS_ID.NEXTVAL, :customer, :quantity, :product)", nativeQuery = true)
+    @Query(value = "INSERT INTO C##AL.ORDERS (ID, CUSTOMER_NAME, QUANTITY, PRODUCT_ID) VALUES "
+            + "(C##AL.SEQ_ORDERS_ID.NEXTVAL, :customer, :quantity, :product)", nativeQuery = true)
     void insert(@Param("customer") String customer, @Param("quantity") Integer quantity, @Param("product") Long productId);
     
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE ORDERS SET QUANTITY = :qty"
+    @Query(value = "UPDATE C##AL.ORDERS SET QUANTITY = :qty"
             + " WHERE ID = :id", nativeQuery = true)
     void update(@Param("id") Long orderId, @Param("qty") Integer newQuantity);
     
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "DELETE FROM ORDERS"
+    @Query(value = "DELETE FROM C##AL.ORDERS"
             + " WHERE ID = ?1", nativeQuery = true)
     void delete(Long orderId);
 

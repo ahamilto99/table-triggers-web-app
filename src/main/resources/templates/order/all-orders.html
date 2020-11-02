@@ -7,15 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>IMS - View Orders</title>
-<!--
 
-    Template 2103 Central
-
-    http://www.tooplate.com/view/2103-central
-
-    -->
-    
-<!-- Font Awesome -->
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -52,7 +44,7 @@
                         <tbody>
                             <tr th:each="order : ${orders}">
                                 <td><span th:text="${order.getCustomer()}"></span></td>
-                                <td><a th:href="@{/inventory/{id}(id=${order.getProductId()})}"><span th:text="${order.getProduct()}"></span></a></td>
+                                <td><span th:text="${order.getProduct()}"></span></td>
                                 <td><span th:text="${#numbers.formatInteger(order.getQuantity(), 1, 'COMMA')}"></span></td>
                                 <td><span th:text="'$ ' + ${#numbers.formatDecimal(order.getPrice(), 0, 'COMMA', 2, 'POINT')}"></span></td>
                                 <td><span th:text="${#temporals.format(order.getTime(), 'h:mm:ss a - MMM dd, yyyy')}"></span></td>
