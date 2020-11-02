@@ -12,7 +12,7 @@
 --GRANT SELECT, INSERT ON AUDIT_PRODUCTS TO C##APP_USER;
 --GRANT SELECT, INSERT, UPDATE, DELETE ON ORDERS TO C##APP_USER;
 
--- After successful launch, terminate the app and change the user details
+-- 4) After successful launch, terminate the app and change the user details
 -- in the application.properties to match the app user above; then re-launch the app
 
 -- TABLES DDL
