@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IMS - View Orders</title>
+<!--
+
+    Template 2103 Central
+
+    http://www.tooplate.com/view/2103-central
+
+    -->
+    
+<!-- Font Awesome -->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/tooplate-style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <section class="tm-section-head" id="top">
+            <header id="header" class="tm-text-gray">
+                <h1>Inventory Managment System</h1>
+                <p>VIEW ORDERS</p>
+            </header>
+        </section>
+
+        <section class="tm-section-1 tm-section-mb">
+
+            <table id="ordersTable" class="wb-tables table table-striped table-hover dataTable" aria-live="polite">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total Cost</th>
+                                <th>Date</th>
+                                <th>Edit Quantity</th>
+                                <th>Delete Order</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="order : ${orders}">
+                                <td><span th:text="${order.getCustomer()}"></span></td>
+                                <td><a th:href="@{/inventory/{id}(id=${order.getProductId()})}"><span th:text="${order.getProduct()}"></span></a></td>
+                                <td><span th:text="${#numbers.formatInteger(order.getQuantity(), 1, 'COMMA')}"></span></td>
+                                <td><span th:text="'$ ' + ${#numbers.formatDecimal(order.getPrice(), 0, 'COMMA', 2, 'POINT')}"></span></td>
+                                <td><span th:text="${#temporals.format(order.getTime(), 'h:mm:ss a - MMM dd, yyyy')}"></span></td>
+                                <td><a th:href="@{/orders/edit/{id}(id=${order.getId()})}" class="btn btn-primary" th:text="EDIT"></a></td>
+                                <td><a th:href="@{/orders/delete/{id}(id=${order.getId()})}" class="btn btn-danger" th:text="DELETE"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div id="confirm" class="modal fade" role="dialog">
+       <div class="modal-dialog">
+           <!-- Modal content-->
+           <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Please confirm</h4>
+               </div>
+               <div class="modal-body">
+                   <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                   <a id="btn-confirm" class="btn btn-primary pull-right">Confirm</a>
+               </div>
+           </div>
+       </div>
+   </div>
+
+        </section>
+
+        <footer class="mt-5">
+            <p class="text-center">
+                <a href="/home" th:text="Home" style="color: darkblue;"></a>
+            </p>
+        </footer>
+    </div>
+
+</body>
+
+</html>

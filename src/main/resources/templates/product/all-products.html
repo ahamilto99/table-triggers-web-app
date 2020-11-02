@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IMS - Current Inventory</title>
+<!--
+
+    Template 2103 Central
+
+    http://www.tooplate.com/view/2103-central
+
+    -->
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/tooplate-style.css">
+
+</head>
+
+<body>
+
+	<div class="container">
+		<section class="tm-section-head" id="top">
+			<header id="header" class="tm-text-gray">
+				<h1>Inventory Managment System</h1>
+				<p>CURRENT INVENTORY</p>
+			</header>
+		</section>
+
+		<section class="tm-section-1 tm-section-mb">
+
+			<table id="productsTable"
+				class="wb-tables table table-striped table-hover dataTable"
+				aria-live="polite">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Count</th>
+						<th>Unit Price</th>
+						<th>Add Inventory</th>
+						<th>Delete Product</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="product : ${products}">
+						<td><span th:text="${product.getName()}"></span></td>
+						<td><span th:text="${#numbers.formatInteger(product.getCount(), 1, 'COMMA')}"></span></td>
+						<td><span th:text="'$ ' + ${#numbers.formatDecimal(product.getPrice(), 0, 'COMMA', 2, 'POINT')}"></span></td>
+						<td><a class="btn btn-primary"
+							th:href="@{/inventory/add/{id}(id=${product.getId()})}"
+							role="button">ADD</a></td>
+						<td><a
+							th:href="@{/inventory/delete/{id}(id=${product.getId()})}"
+							role="button" class="btn btn-danger">DELETE</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</section>
+
+		<footer class="mt-5">
+			<p class="text-center">
+				<a href="/home" th:text="Home" style="color: darkblue;"></a>
+			</p>
+		</footer>
+	</div>
+
+</body>
+
+</html>
