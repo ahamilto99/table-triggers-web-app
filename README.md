@@ -3,7 +3,7 @@ Inventory Management Application (Spring Boot) that Demos Table Triggers in Orac
 
 The triggers implement a business hours rule, inventory auditing and only allow orders to be processed if there is a sufficient quantity of the product in stock.
 
-The Oracle Database is implemented using a Docker Container, therefore follow the ensuing steps when launching the app:
+The Oracle Database is implemented using a Docker Container, therefore downloaded and installed its image from Docker Hub and then follow the ensuing steps when launching the app:
 1) Create Docker Container with the following command:
 
 docker run -dit --name oracle-db-container -p 51234:1521 -e DB_SID=IMSDB store/oracle/database-enterprise:12.2.0.1-slim
