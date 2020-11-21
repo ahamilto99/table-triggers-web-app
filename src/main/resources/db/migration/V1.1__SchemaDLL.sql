@@ -3,8 +3,8 @@
 
 -- 2) Connect to the database instance (SYS AS SYSDBA; Oradoc_db1), create DBA
 -- and then connect to the database as the DBA
---CREATE USER AL IDENTIFIED BY AL;
---GRANT DBA TO AL;
+--CREATE USER C##AL IDENTIFIED BY AL;
+--GRANT DBA TO C##AL;
 
 -- 3) Launch the app and then create the app user account
 --CREATE USER APP_USER IDENTIFIED BY APP;
@@ -19,7 +19,7 @@
 -- disable flyway and change the user details to match the app user above; then re-launch the app
 
 -- TABLES DDL
-CREATE TABLE AL.PRODUCTS (
+CREATE TABLE C##AL.PRODUCTS (
      ID NUMBER,
      NAME VARCHAR2(50),
      INVENTORY_COUNT NUMBER(10),
@@ -27,7 +27,7 @@ CREATE TABLE AL.PRODUCTS (
      PRIMARY KEY(ID)
 );
 
-CREATE TABLE AL.AUDIT_PRODUCTS (
+CREATE TABLE C##AL.AUDIT_PRODUCTS (
      ID NUMBER,
      NAME VARCHAR2(50),
      UNIT_PRICE NUMBER(*,2),
@@ -39,7 +39,7 @@ CREATE TABLE AL.AUDIT_PRODUCTS (
      PRIMARY KEY(ID)
 );
 
-CREATE TABLE AL.ORDERS (
+CREATE TABLE C##AL.ORDERS (
      ID NUMBER,
      CUSTOMER_NAME VARCHAR2(50),
      QUANTITY NUMBER(10),
