@@ -29,10 +29,10 @@ public class OrderController {
         this.productService = productService;
     }
 
-    @GetMapping("/home")
-    public String menuGet() {
-        return "menu";
-    }
+	@GetMapping(value = { "/", "/home", "/index" })
+	public String menuGet() {
+		return "menu";
+	}
 
     @GetMapping("/orders")
     public String ordersGet(Model model) {
